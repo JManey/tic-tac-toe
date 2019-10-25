@@ -23,13 +23,23 @@
       width: 30em;
       height: 30em;
   }
+  .one {
+      grid-area: one;
+  }
+  .two {
+      grid-area: two;
+  }
   .gameboard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     background-color: rgb(233, 201, 189);
-    grid-column-gap: 5px;
-    grid-row-gap: 5px;
+    column-gap: 5px;
+    row-gap: 5px;
+    grid-template-areas: 
+        "one | two | three"
+        "four | five | six"
+        "seven | eight | nine";
   }
   .replay {
       width: 8rem;
