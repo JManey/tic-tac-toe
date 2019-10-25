@@ -5,6 +5,7 @@
   body {
     font-family: 'Indie Flower', cursive;
     text-align: center;
+    background-color: lightseagreen;
   }
   h1 {
       font-size: 3rem;
@@ -17,32 +18,21 @@
   .scores {
       font-size: 1.3rem;
   }
-  #board-container {
+   
+  #container {
       margin: 0 auto;
-      background-color: crimson;
-      width: 30em;
-      height: 30em;
+      width: 300px;
+      
+      
   }
-  .one {
-      grid-area: one;
+
+  .cell {
+      width: 100px;
+      height: 100px;
+      border: 5px solid black;
+      font-size: 20px;
   }
-  .two {
-      grid-area: two;
-  }
-  .gameboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    background-color: rgb(233, 201, 189);
-    column-gap: 5px;
-    row-gap: 5px;
-    grid-template-areas: 
-        "one | two | three"
-        "four | five | six"
-        "seven | eight | nine";
-  }
-  p {
-      display: grid;
+
   }
   .replay {
       width: 8rem;
