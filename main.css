@@ -41,6 +41,9 @@
         "four | five | six"
         "seven | eight | nine";
   }
+  p {
+      display: grid;
+  }
   .replay {
       width: 8rem;
       height: 3.3rem;
