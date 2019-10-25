@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Indie Flower', cursive;
+  }
+  h1 {
+      font-size: 3rem;
+  }
+  h2 {
+      font-size: 2rem;
+  }
+  .scores {
+      font-size: 1.3rem;
+  }
+  .gameboard {
+    background-color: coral;
+  }
+  .replay {
+      width: 8rem;
+      height: 3.3rem;
+      font-family: 'Indie Flower', cursive;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 17px;
+  }
