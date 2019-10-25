@@ -4,18 +4,32 @@
 
   body {
     font-family: 'Indie Flower', cursive;
+    text-align: center;
   }
   h1 {
       font-size: 3rem;
   }
-  h2 {
+  .message {
+      display: flex;
       font-size: 2rem;
+      justify-content: space-around;
   }
   .scores {
       font-size: 1.3rem;
   }
+  #board-container {
+      margin: 0 auto;
+      background-color: crimson;
+      width: 30em;
+      height: 30em;
+  }
   .gameboard {
-    background-color: coral;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: rgb(233, 201, 189);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
   }
   .replay {
       width: 8rem;
