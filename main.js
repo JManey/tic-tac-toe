@@ -17,7 +17,7 @@ let board = document.getElementById('board-container');
 board.addEventListener('click', function(event) {
     event.preventDefault();
     let clickedGrid = event.target;
-    if(clickedGrid.tagName !== 'P') return;
+    if(clickedGrid.tagName !== 'P' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     console.log(clickedGrid)
     if(turn === 1) {
         clickedGrid.innerHTML='<h3>X</h3>';
