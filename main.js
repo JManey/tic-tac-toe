@@ -64,7 +64,7 @@ function nextRound() {
     game.turn = 1;
     game.moves = 0;
     for(i=1; i < 10; i++) {
-        cell[i].textContent = '';
+        document.getElementById(i).innerHTML = '';
     }
 
 }
@@ -82,6 +82,7 @@ function gameFunc(event) {
     
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     if(game.turn === 1) {
+        console.log(clickedGrid);
         clickedGrid.innerHTML='<h3>X</h3>';
         player1Selections.push(parseInt(clickedGrid.id));
     } else {
