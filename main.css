@@ -22,8 +22,10 @@
   #container {
       margin: 0 auto;
       width: 300px;
-      
-      
+         
+  }
+  h4 {
+      font-size: 1.6rem;
   }
 
   .cell {

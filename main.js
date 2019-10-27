@@ -38,6 +38,7 @@ let replayBtn = document.getElementById('replayBtn');
 let scoreP1 = document.getElementById('player1score');
 let scoreP2 = document.getElementById('player2score');
 let announce = document.getElementById('announce');
+let cell = document.querySelectorAll('H3');
 
 /*----- event listeners -----*/
 board.addEventListener('click', gameFunc); 
@@ -54,6 +55,18 @@ function init() {
     createGameBoard();
     convertToStrings(winners);
     winnerCheck = false;
+    announce.textContent = 'Good Luck!';
+}
+
+function nextRound() {
+    announce.textContent = 'Good Luck!';
+    winnerCheck = false;
+    game.turn = 1;
+    game.moves = 0;
+    for(i=1; i < 10; i++) {
+        cell[i].textContent = '';
+    }
+
 }
 
 
@@ -124,8 +137,8 @@ function updateScore() {
 }
 
 function playAgain() {
-    init();
     updateScore();
+    nextRound();
 }         
     
 
