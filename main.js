@@ -15,6 +15,7 @@ const winners = [
     [1,5,9],
     [3,5,7]
 ];
+
 /*----- app's state (variables) -----*/
 var game = {
     player1: 'X',
@@ -27,13 +28,14 @@ let player1Selections = [];
 let player2Selections = [];
 
 let winnerStrings = [];
+let winnerCheck;
 
 /*----- cached element references -----*/
 let board = document.getElementById('container');
 
 /*----- event listeners -----*/
 board.addEventListener('click', gameFunc); 
-    
+ 
 
 
 /*----- functions -----*/
@@ -44,6 +46,7 @@ function init() {
     game.moves = 0;
     createGameBoard();
     convertToStrings(winners);
+    winnerCheck = false;
 }
 
 
@@ -55,7 +58,8 @@ function convertToStrings () {
 
 function gameFunc(event) {
     event.preventDefault();
-    let clickedGrid = event.target;
+    let clickedGrid = event.target;  
+    
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     if(game.turn === 1) {
         clickedGrid.innerHTML='<h3>X</h3>';
@@ -64,12 +68,12 @@ function gameFunc(event) {
         clickedGrid.innerHTML='<h3>O</h3>';
         player2Selections.push(parseInt(clickedGrid.id));
     }
-
     game.turn = game.turn * -1;
     game.moves += 1;
     //check for winner if game isn't over
-    if(game.moves === maxMoves) {
-        console.log('game is a draw');
+    if(!winnerCheck && game.moves === maxMoves) {
+        console.log('tie');
+        board.removeEventListener('click', gameFunc);
     } else {
         winner();
     }
@@ -85,18 +89,29 @@ function winner() {
     let p1string = player1Selections.join('');
     let p2string = player2Selections.join('');
 
-        winnerStrings.forEach(function(element) {
-            if(p1string.includes(element)) {
-                console.log('player1 won');
-                game.moves = maxMoves;
-                return 
-            } else if (p2string.includes(element)) {
-                console.log('player2 won');
-                game.moves = maxMoves;
-                return 
-             } else return;
-            });
+ 
+    winnerStrings.forEach(function(element) {
+        if(p1string.includes(element)) {
+            console.log('player1 won');
+            winnerCheck = true
+            board.removeEventListener('click', gameFunc);
+            return; 
+        } else if (p2string.includes(element)) {
+            console.log('player2 won');
+            console.log(element);
+            winnerCheck = true
+            board.removeEventListener('click', gameFunc);
+            return; 
+        } else {
+            return;
+        }
+    })
+    
 }
+            
+            
+    
+
 
 function createGameBoard() {
     let table = document.createElement('table');
