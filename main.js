@@ -32,7 +32,7 @@ let winnerStrings = [];
 let board = document.getElementById('container');
 
 /*----- event listeners -----*/
-board.addEventListener('click', game); 
+board.addEventListener('click', gameFunc); 
     
 
 
@@ -53,7 +53,7 @@ function convertToStrings () {
     });
 }
 
-function game(event) {
+function gameFunc(event) {
     event.preventDefault();
     let clickedGrid = event.target;
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
@@ -72,8 +72,8 @@ function game(event) {
         console.log('game is a draw');
     } else {
         winner();
-    }s
-}
+    }
+};
 
 
 
