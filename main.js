@@ -42,7 +42,7 @@ let cell = document.querySelectorAll('H3');
 
 /*----- event listeners -----*/
 board.addEventListener('click', gameFunc); 
-replayBtn.addEventListener('click', playAgain);
+// replayBtn.addEventListener('click', playAgain);
  
 
 
@@ -66,7 +66,10 @@ function nextRound() {
     for(i=1; i < 10; i++) {
         document.getElementById(i).innerHTML = '';
     }
-
+    player1Selections.length = 0;
+    player2Selections.length = 0;
+    replayBtn.removeEventListener('click', playAgain);
+    board.addEventListener('click', gameFunc); 
 }
 
 
@@ -82,7 +85,6 @@ function gameFunc(event) {
     
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     if(game.turn === 1) {
-        console.log(clickedGrid);
         clickedGrid.innerHTML='<h3>X</h3>';
         player1Selections.push(parseInt(clickedGrid.id));
     } else {
@@ -95,6 +97,7 @@ function gameFunc(event) {
     if(!winnerCheck && game.moves === maxMoves) {
         announce.textContent = `It's a draw!!`;
         board.removeEventListener('click', gameFunc);
+        replayBtn.addEventListener('click', playAgain);
     } else {
         winner();
     }
@@ -117,13 +120,14 @@ function winner() {
             player1Score ++;
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
+            replayBtn.addEventListener('click', playAgain);
             return; 
         } else if (p2string.includes(element)) {
             announce.textContent = 'Player O Wins!!!';
             player2Score ++;
-            console.log(element);
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
+            replayBtn.addEventListener('click', playAgain);
             return; 
         } else {
             return;
