@@ -11,16 +11,20 @@
 <body>
     <h1>Let's Play Tic-Tac-Toe!!!</h1>
     <div class="message">
-        <h2>Message</h2>
         <h2>Player X</h2>
         <h2>Player O</h2>
     </div> 
-
-    <div class="scores">scores</div>
+    <div class="message scores" id="messages">
+            <h3 id="player1score"></h3>
+            <h3 id="player2score"></h3>
+        </div> 
+    <div>
+        <h2 class="message" id="announce">message</h2>
+    </div>
 
     <div id="container" class="board"></div>
         
-    <button class="replay">Play Again</button>
+    <button class="replay" id='replayBtn'>Play Again</button>
         
 
     

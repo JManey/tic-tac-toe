@@ -29,12 +29,19 @@ let player2Selections = [];
 
 let winnerStrings = [];
 let winnerCheck;
+let player1Score = 0;
+let player2Score = 0;
 
 /*----- cached element references -----*/
 let board = document.getElementById('container');
+let replayBtn = document.getElementById('replayBtn');
+let scoreP1 = document.getElementById('player1score');
+let scoreP2 = document.getElementById('player2score');
+let announce = document.getElementById('announce');
 
 /*----- event listeners -----*/
 board.addEventListener('click', gameFunc); 
+replayBtn.addEventListener('click', playAgain);
  
 
 
@@ -72,7 +79,7 @@ function gameFunc(event) {
     game.moves += 1;
     //check for winner if game isn't over
     if(!winnerCheck && game.moves === maxMoves) {
-        console.log('tie');
+        announce.textContent = `It's a draw!!`;
         board.removeEventListener('click', gameFunc);
     } else {
         winner();
@@ -92,12 +99,14 @@ function winner() {
  
     winnerStrings.forEach(function(element) {
         if(p1string.includes(element)) {
-            console.log('player1 won');
+            announce.textContent = 'Player X Wins!!!';
+            player1Score ++;
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
             return; 
         } else if (p2string.includes(element)) {
-            console.log('player2 won');
+            announce.textContent = 'Player O Wins!!!';
+            player2Score ++;
             console.log(element);
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
@@ -108,8 +117,16 @@ function winner() {
     })
     
 }
-            
-            
+     
+function updateScore() {
+    scoreP1.innerHTML = player1Score;
+    scoreP2.innerHTML = player2Score;
+}
+
+function playAgain() {
+    init();
+    updateScore();
+}         
     
 
 
