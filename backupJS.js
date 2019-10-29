@@ -24,8 +24,8 @@ var game = {
     moves: 0,
 };
 
-let player1Selections = {};
-let player2Selections = {};
+let player1Selections = [];
+let player2Selections = [];
 
 let winnerStrings = [];
 let winnerCheck;
@@ -66,8 +66,8 @@ function nextRound() {
     for(i=1; i < 10; i++) {
         document.getElementById(i).innerHTML = '';
     }
-    player1Selections = {};
-    player2Selections = {};
+    player1Selections.length = 0;
+    player2Selections.length = 0;
     replayBtn.removeEventListener('click', playAgain);
     board.addEventListener('click', gameFunc); 
 }
@@ -86,10 +86,10 @@ function gameFunc(event) {
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     if(game.turn === 1) {
         clickedGrid.innerHTML='<h3>X</h3>';
-        player1Selections[parseInt(clickedGrid.id)] = -1;
+        player1Selections.push(parseInt(clickedGrid.id));
     } else {
         clickedGrid.innerHTML='<h3>O</h3>';
-        player2Selections[parseInt(clickedGrid.id)] = 1;
+        player2Selections.push(parseInt(clickedGrid.id));
     }
     game.turn = game.turn * -1;
     game.moves += 1;
@@ -104,18 +104,26 @@ function gameFunc(event) {
 
 
 
-function winner() { 
+function winner() {
+    //sort arrays to make it easier to compare to winners array
+    // player1Selections.sort(function(a,b) {return a - b});
+    // player2Selections.sort(function(a,b) {return a - b});
+
+    let p1string = player1Selections.sort(function(a,b) {return a-b}).join('');
+    let p2string = player2Selections.sort(function(a,b) {return a-b}).join('');
+// console.log(`player 1 ${p1string}`)
+// console.log(` player 2 ${p2string}`)
+ 
     winnerStrings.forEach(function(element) {
-        // console.log(element)
-        console.log(element[0] +' ' + element[1] + element[2])
-        if((player1Selections[element[0]] + player1Selections[element[1]] + player1Selections[element[2]] === -3)) {
+        console.log(element)
+        if(p1string.includes(element)) {
             announce.textContent = 'Player X Wins!!!';
             player1Score ++;
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
             replayBtn.addEventListener('click', playAgain);
             return; 
-        } else if ((player2Selections[element[0]] + player2Selections[element[1]] + player2Selections[element[2]] === 3)) {
+        } else if (p2string.includes(element)) {
             announce.textContent = 'Player O Wins!!!';
             player2Score ++;
             winnerCheck = true
