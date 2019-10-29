@@ -23,12 +23,12 @@ var game = {
     turn: 1,
     moves: 0,
 };
-let player1Selections = {};
-let player2Selections = {};
+let playerSelections = {};
 let winnerStrings = [];
 let winnerCheck;
 let player1Score = 0;
 let player2Score = 0;
+let playerSelectionsSum;
 
 /*----- cached element references -----*/
 let board = document.getElementById('container');
@@ -62,8 +62,7 @@ function nextRound() {
     for(i=1; i < 10; i++) {
         document.getElementById(i).innerHTML = '';
     }
-    player1Selections = {};
-    player2Selections = {};
+    playerSelections = {};
     replayBtn.removeEventListener('click', playAgain);
     board.addEventListener('click', gameFunc); 
 }
@@ -82,10 +81,10 @@ function gameFunc(event) {
     if(clickedGrid.tagName !== 'TD' || clickedGrid.textContent === 'X' || clickedGrid.textContent === 'O') return;
     if(game.turn === 1) {
         clickedGrid.innerHTML='<h3>X</h3>';
-        player1Selections[parseInt(clickedGrid.id)] = -1;
+        playerSelections[parseInt(clickedGrid.id)] = -1;
     } else {
         clickedGrid.innerHTML='<h3>O</h3>';
-        player2Selections[parseInt(clickedGrid.id)] = 1;
+        playerSelections[parseInt(clickedGrid.id)] = 1;
     }
     game.turn = game.turn * -1;
     game.moves += 1;
@@ -100,14 +99,16 @@ function gameFunc(event) {
 
 function winner() { 
     winnerStrings.forEach(function(element) {
-        if((player1Selections[element[0]] + player1Selections[element[1]] + player1Selections[element[2]] === -3)) {
+        playerSelectionsSum = playerSelections[element[0]] + playerSelections[element[1]] + playerSelections[element[2]];
+        
+        if(playerSelectionsSum === -3) {
             announce.textContent = 'Player X Wins!!!';
             player1Score ++;
             winnerCheck = true
             board.removeEventListener('click', gameFunc);
             replayBtn.addEventListener('click', playAgain);
             return; 
-        } else if ((player2Selections[element[0]] + player2Selections[element[1]] + player2Selections[element[2]] === 3)) {
+        } else if (playerSelectionsSum === 3) {
             announce.textContent = 'Player O Wins!!!';
             player2Score ++;
             winnerCheck = true
