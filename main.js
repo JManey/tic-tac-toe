@@ -23,10 +23,8 @@ var game = {
     turn: 1,
     moves: 0,
 };
-
 let player1Selections = {};
 let player2Selections = {};
-
 let winnerStrings = [];
 let winnerCheck;
 let player1Score = 0;
@@ -42,10 +40,8 @@ let cell = document.querySelectorAll('H3');
 
 /*----- event listeners -----*/
 board.addEventListener('click', gameFunc); 
-// replayBtn.addEventListener('click', playAgain);
+// board.addEventListener('mouseover', changeCursor);
  
-
-
 /*----- functions -----*/
 function init() {
     game.player1 = `X's`;
@@ -102,12 +98,8 @@ function gameFunc(event) {
     }
 };
 
-
-
 function winner() { 
     winnerStrings.forEach(function(element) {
-        // console.log(element)
-        console.log(element[0] +' ' + element[1] + element[2])
         if((player1Selections[element[0]] + player1Selections[element[1]] + player1Selections[element[2]] === -3)) {
             announce.textContent = 'Player X Wins!!!';
             player1Score ++;
@@ -126,7 +118,6 @@ function winner() {
             return;
         }
     })
-    
 }
      
 function updateScore() {
@@ -139,8 +130,6 @@ function playAgain() {
     nextRound();
 }         
     
-
-
 function createGameBoard() {
     let table = document.createElement('table');
     let idCounter = 1;
@@ -149,15 +138,13 @@ function createGameBoard() {
         for(let cell of row) {
             let newCell = table.rows[table.rows.length -1]
             .insertCell();
-            newCell.classList.add('cell');
-            newCell.setAttribute('id', idCounter)
+            newCell.classList.add('cell', 'cell' + idCounter);
+            newCell.setAttribute('id', idCounter);
             idCounter ++;
-
         }
     }
     //add to the dom
     board.appendChild(table);
 }
-
 
 init();
